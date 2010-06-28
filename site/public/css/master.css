@@ -1,0 +1,98 @@
+html, body, table, ul, ol, form {
+  padding:0; margin: 0;
+}
+ul, ol {
+  margin-left:1.5em;
+}
+html { height: 100%; }
+body {
+  background: #123;
+  font-family: 'Lucida Grande', Verdana, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 20px;
+  color: #aaa;
+  height: 100%;
+}
+
+#wrapper {
+  height: 100%;
+}
+#map {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 450px;
+  height: 100%;
+  z-index: 1;
+}
+
+#main {
+  margin-left: 450px;
+  height: 100%;
+  margin-top: 0;
+  display: block;
+}
+li h4 { margin-top: 0; }
+
+section.bar {
+  float:left;
+  margin: 10px;
+  -webkit-box-shadow: black 0 2px 4px;
+  border-radius: 5px;
+  background: #333;
+  width: 300px;
+}
+.bar .list {
+  list-style-type: none;
+  margin-left:0;
+}
+.list h4 {
+  margin:0;
+}
+.list li {
+  margin-bottom: 5px;
+  -webkit-box-shadow: black 0 1px 2px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-shadow: black 0px 1px 0px;
+}
+section.bar .pad {
+  margin: 15px;
+}
+.bar h2 {
+  margin: 12px 15px;
+  background: #1F1F1F;
+  color: #eee;
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  text-shadow: black 0px -1px 0px;
+  text-transform: uppercase;
+}
+
+/* Event types */
+.pending_order { background-color: orange; color: #eee;}
+.login { background-color: green; color: #eee;}
+/* hacks */
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
+}

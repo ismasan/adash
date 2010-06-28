@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <link rel="stylesheet" href="./css/master.css" />
+  <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="./js/app.js"></script>
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAyL0lilqipZ1bgXkqU4XI8xTC22cZz2M43xY8GdkXMoA42UqnkxQzkd8Tn8HyWfQ9QwkxX5HZ24de4A&sensor=false" type="text/javascript"></script>
+	<title>Websockets Activity Board</title>
+</head>
+<body onload="init()" onunload="GUnload()">
+  <div id="wrapper">
+    
+    <div id="map">
+
+    </div><!-- /map -->
+
+    <div id="main" class="clearfix">
+
+      <section class="bar">
+        <h2>Actividad</h2>
+        <ul class="pad list events">
+          <li class="order pending_order">
+            <h4>Romano</h4>
+            2 products, $30,000
+          </li>
+          <li class="user login">
+            <h4>Ismael Celis</h4>
+          </li>
+          <li class="product updated">
+            <h4>Chococat</h4>
+          </li>
+        </ul>
+      </section><!-- /events -->
+
+      <section class="bar">
+        <h2>Tiendas</h2>
+      </section>
+    </div>
+    
+  </div>
+</body>
+</html>
