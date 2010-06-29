@@ -17,30 +17,22 @@ body {
 #wrapper {
   height: 100%;
 }
-#map {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
 
 #main {
   position: absolute;
   top:0;right:0;
   z-index:2;
   display: block;
+  padding-top: 40px;
 }
+
 li h4 { margin-top: 0; }
 
 section.bar {
   position:relative;
   z-index:1000;
   float:left;
-  margin: 40px 10px 10px;
+  margin: 0 10px 0 0;
   -webkit-box-shadow: black 0 2px 4px;
   border-radius: 5px;
   background: #333;
@@ -84,6 +76,18 @@ section.bar {
   padding: 0;
   margin: 0px 20px 20px;
 }
+
+#LocationWidget {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
 /* Event types */
 .pending_order { background-color: orange; color: #eee;}
 .login { background-color: green; color: #eee;}

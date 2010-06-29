@@ -23,17 +23,15 @@
   </script>
   <script type="text/javascript" src="./widgets/line_chart.js"></script>
   <script type="text/javascript" src="./widgets/activity.js"></script>
+  <script type="text/javascript" src="./widgets/location.js"></script>
 	<title>Websockets Activity Board</title>
 </head>
-<body onload="init()" onunload="GUnload()">
+<body>
   <div id="wrapper">
     
-    <div id="map">
-
-    </div><!-- /map -->
+    <div id="LocationWidget"></div>
 
     <div id="main" class="clearfix">
-
       <section class="bar activity">
         <h2>Activity</h2>
         <div class="widget" id="ActivityWidget"></div>
