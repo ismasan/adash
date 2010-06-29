@@ -1,53 +1,84 @@
-var sys = require("sys"),
-  ws = require("./lib/ws"),
-  p = sys.puts;
+var sys = require("sys");
+var ws = require('./lib/node-websocket-server/lib/ws');
 
-// CHANNEL ::::::::::::::::::::::::::::::::
-var Channel = function(){
-  var clients = [];
-  
-  this.add = function(ws){
-    clients.push(ws);
-    p('NUM CLIENTES: ' + clients.length)
-  };
-  
-  this.remove = function(ws){
-    var c = [];
-    for(var i=0,t=clients.length;i<t;i++){
-      if(clients[i] != ws) c.push(clients[i])
-    }
-    clients = c;
-  };
-  
-  this.write = function(event_name, data){
-    try{
-      for(var i=0,t=clients.length;i<t;i++){
-        clients[i].write(data)
-      }
-    }catch(e){
-      p(e)
-    }
-    
-  }
-};
 
-// CHANNEL INSTANCE ::::::::::::::::::::::::
-var channel = new Channel();
+/*-----------------------------------------------
+  logging:
+-----------------------------------------------*/
+// var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+// 
+// function pad(n) {
+//   return n < 10 ? '0' + n.toString(10) : n.toString(10);
+// }
+// 
+// function timestamp() {
+//   var d = new Date();
+//   return [
+//     d.getDate(),
+//     months[d.getMonth()],
+//     [ pad(d.getHours())
+//     , pad(d.getMinutes())
+//     , pad(d.getSeconds())
+//     , (d.getTime() + "").substr( - 4, 4)
+//     ].join(':')
+//   ].join(' ');
+// };
+// 
+// function log(msg) {
+//   sys.puts(timestamp() + ' - ' + msg.toString());
+// };
+ function log(msg) {
+   sys.puts(msg.toString());
+ };
 
-// SERVER ::::::::::::::::::::::::::::::::::
-ws.createServer(function (websocket) {
-  websocket.addListener("connect", function (resource) { 
-    sys.debug("connect: " + resource);
-    channel.add(websocket);
-    
-  }).addListener("data", function (data) { 
-    sys.debug(data);
-    channel.write(data);
-    
-  }).addListener("close", function () { 
-    channel.remove(websocket)
-    sys.debug("close");
+
+/*-----------------------------------------------
+  Spin up our server:
+-----------------------------------------------*/
+var server = ws.createServer({
+  debug: true
+});
+
+server.addListener("listening", function(){
+  log("Listening for connections.");
+});
+
+// Handle WebSocket Requests
+server.addListener("connection", function(conn){
+  log("opened connection: "+conn._id);
+  
+  server.send(conn._id, "Connected as: "+conn._id);
+  server.broadcast("<"+conn._id+"> connected");
+  
+  conn.addListener("message", function(message){
+    log("<"+conn._id+"> "+message);
+    server.broadcast("<"+conn._id+"> "+message);
   });
-}).listen(8080);
+});
 
-p('WebSockets server launched on localhost:8080')
+server.addListener("close", function(conn){
+  log("closed connection: "+conn._id);
+  server.broadcast("<"+conn._id+"> disconnected");
+});
+
+// Handle HTTP Requests:
+// server.addListener("request", function(req, res){
+//   res.writeHead(200, {'Content-Type': 'text/plain'});
+//   res.end('We can handle normal http connections too!\n');
+// });
+// 
+// server.addListener("shutdown", function(conn){
+//   // never actually happens, because I never tell the server to shutdown.
+//   log("Server shutdown");
+// });
+
+
+/*-----------------------------------------------
+  Server:
+-----------------------------------------------*/
+
+
+
+
+
+server.listen(8000, "localhost");
