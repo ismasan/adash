@@ -43,7 +43,6 @@ Widgets.LineChartWidget = (function(){
     
     window.setInterval(function(){
       current_interval++;
-      console.log(current_interval);
     },5000);
     // chart     = new google.visualization.LineChart(document.getElementById(container));
   };

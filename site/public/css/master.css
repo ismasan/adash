@@ -64,9 +64,7 @@ section.bar {
   padding: 5px 10px;
   border-radius: 4px;
   text-shadow: black 0px 1px 0px;
-}
-section.bar .pad {
-  margin: 15px;
+  background-color:#5A5A5A;
 }
 .bar h2 {
   margin: 12px 15px;
@@ -78,7 +76,14 @@ section.bar .pad {
   text-shadow: #000 1px 1px 0px;
   text-transform: uppercase;
 }
-
+/*:::::::::::::::::::::::::::::: Widgets :::::::::::::::::::::::::::::::::::::*/
+#ActivityWidget {
+  height: 320px;
+  overflow: hidden;
+  border-bottom: solid gray 3px;
+  padding: 0;
+  margin: 0px 20px 20px;
+}
 /* Event types */
 .pending_order { background-color: orange; color: #eee;}
 .login { background-color: green; color: #eee;}

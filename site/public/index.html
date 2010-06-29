@@ -18,10 +18,11 @@
         if(document.getElementById(widget_name) != null)
           active_widgets[widget_name] = new Widgets[widget_name](server, widget_name);
       }
-      active_widgets.LineChartWidget.update('Event 1',1)
+      // active_widgets.LineChartWidget.update('Event 1',1)
     });
   </script>
   <script type="text/javascript" src="./widgets/line_chart.js"></script>
+  <script type="text/javascript" src="./widgets/activity.js"></script>
 	<title>Websockets Activity Board</title>
 </head>
 <body onload="init()" onunload="GUnload()">
@@ -35,18 +36,7 @@
 
       <section class="bar activity">
         <h2>Activity</h2>
-        <ul class="pad list events">
-          <li class="order pending_order">
-            <h4>Blah</h4>
-            2 products, $30,000
-          </li>
-          <li class="user login">
-            <h4>Ismael Celis</h4>
-          </li>
-          <li class="product updated">
-            <h4>Chococat</h4>
-          </li>
-        </ul>
+        <div class="widget" id="ActivityWidget"></div>
       </section><!-- /events -->
 
       <section class="bar stats">
