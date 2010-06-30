@@ -18,14 +18,6 @@ body {
   height: 100%;
 }
 
-#main {
-  position: absolute;
-  top:0;right:0;
-  z-index:2;
-  display: block;
-  padding-top: 40px;
-}
-
 li h4 { margin-top: 0; }
 
 section.bar {
@@ -38,9 +30,9 @@ section.bar {
   padding: 12px 0;
   margin-bottom:10px;
 }
-.column {float:left;margin-right:10px;}
-.column.narrow {width: 300px;}
-.column.wide {width:440px;}
+.column {position:absolute;z-index:5;top:10px;}
+.column.narrow {width: 300px;left:10px;}
+.column.wide {width:440px;right:10px;}
 
 .widget {padding:0 20px 20px 20px;}
 
@@ -71,14 +63,14 @@ section.bar {
 }
 .bar.chat {clear:left;}
 /*:::::::::::::::::::::::::::::: Widgets :::::::::::::::::::::::::::::::::::::*/
-#LineChartWidget {min-height:206px;}
+#LineChartWidget {min-height:220px;padding-bottom:0;}
 
 #ControlsWidget {padding-bottom:0;}
 #ControlsWidget .status { text-shadow: black 0px 1px 0px; color:#A90D0B; display:inline-block;margin-left:2em; }
 #ControlsWidget .status.running {color:green;}
 
 #ActivityWidget {
-  height: 488px;
+  height: 425px;
   overflow: hidden;
   border-bottom: solid gray 3px;
   padding: 0;
@@ -105,13 +97,13 @@ section.bar {
   z-index: 1;
 }
 
-#OrderTotalsWidget {min-height:113px;}
+#OrderTotalsWidget {min-height:113px;padding-bottom:0;}
 #OrderTotalsWidget .total {font-size: 45px;float:right;color:#fff;text-shadow: black 2px 2px 0px;}
 #OrderTotalsWidget .placed_total {float:right;font-size:20px;}
 #OrderTotalsWidget strong {float:left;line-height:3;}
 
 #ChatWidget {padding-bottom:0;}
-#ChatWidget .messages {height: 87px;overflow:auto;margin-right:10px;}
+#ChatWidget .messages {height: 50px;overflow:auto;margin-right:10px;}
 #ChatWidget strong {text-shadow: black 2px 2px 0px;color:#fff;}
 
 /* Event types */
