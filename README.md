@@ -1,5 +1,7 @@
 # intro to websockets
 
+# Simple websockets example (/simpple.html)
+
 # Explain project: panic dashboard (show)
 
 # simple socket server (Node JS)
