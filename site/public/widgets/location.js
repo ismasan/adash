@@ -1,7 +1,7 @@
 google.load("maps","3", {"other_params":"sensor=true"});
 Widgets.LocationWidget = (function(){
   
-  var server, container, bounds, self;
+  var server, container, bounds;
   // var MAP;
   var USERS = {};
   
@@ -67,29 +67,19 @@ Widgets.LocationWidget = (function(){
       if(info != infowindow) infowindow.close();
     });
     markers[key] = marker;
-    // Adjust map to the left after 4 seconds
-    // window.clearTimeout(pan_interval);
-    //     pan_interval = window.setTimeout(function(){
-    //       MAP.panBy(300, 0);
-    //     }, 4000);
+  }
+  
+  function update(evt, event_name, data){
+    addMarker(data.latitude, data.longitude, event_name + '<br />' + data.info);
   }
   
   var klass = function(event_stream, container_element){
     server = event_stream;
     container = container_element;
-    self = this;
     bounds = new google.maps.LatLngBounds();
     findLoc();
     
-    server.bind('order_placed order_shipped contact_received', function(evt, evt_name, data){        
-      self.update(evt_name, data)
-    });
-  };
-  
-  klass.prototype = {
-    update: function(event_name, data){
-      addMarker(data.latitude, data.longitude, event_name + '<br />' + data.info);
-    }
+    server.bind('order_placed order_shipped contact_received', update);
   };
   
   return klass;

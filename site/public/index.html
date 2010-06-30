@@ -14,8 +14,7 @@
     
     $(function(){
       for(widget_name in Widgets){
-        if(document.getElementById(widget_name) != null)
-          active_widgets[widget_name] = new Widgets[widget_name](server, widget_name);
+        active_widgets[widget_name] = new Widgets[widget_name](server, widget_name);
       }
     });
   </script>
@@ -24,9 +23,10 @@
   <script type="text/javascript" src="./widgets/location.js"></script>
   <script type="text/javascript" src="./widgets/controls.js"></script>
   <script type="text/javascript" src="./widgets/order_totals.js"></script>
+  <script type="text/javascript" src="./widgets/chat.js"></script>
 	<title>Websockets Activity Board</title>
 </head>
-<body onunload="GUnload()">
+<body>
   <div id="wrapper">
     
     <div id="LocationWidget"></div>
@@ -56,10 +56,23 @@
               <strong>Placed orders:</strong> <span class="placed_total">$<span class="placed_amount">0</span></span>
             </div>
             <div class="clearfix">
+              <strong>Cancelled orders:</strong> <span class="placed_total">$<span class="cancelled_amount">0</span></span>
+            </div>
+            <div class="clearfix">
               <strong>Closed orders:</strong> <span class="total">$<span class="closed_amount">0</span></span>
             </div>
           </div>
         </section><!-- /stats -->
+        
+        <section class="bar chat">
+          <h2>Chatter</h2>
+          <div class="widget" id="ChatWidget">            
+            <ul class="messages">
+
+            </ul>
+          </div>
+        </section><!-- /data controls -->
+        
       </div>
       
     </div>

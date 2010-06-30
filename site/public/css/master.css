@@ -60,7 +60,7 @@ section.bar {
   background-color:#5A5A5A;
 }
 .bar h2 {
-  margin: 0 15px 15px 15px;
+  margin: 0 15px 12px 15px;
   background: #1F1F1F;
   color: #eee;
   font-size: 16px;
@@ -69,9 +69,14 @@ section.bar {
   text-shadow: #000 1px 1px 0px;
   text-transform: uppercase;
 }
+.bar.chat {clear:left;}
 /*:::::::::::::::::::::::::::::: Widgets :::::::::::::::::::::::::::::::::::::*/
+#LineChartWidget {min-height:206px;}
+
+#ControlsWidget {padding-bottom:0;}
+
 #ActivityWidget {
-  height: 320px;
+  height: 488px;
   overflow: hidden;
   border-bottom: solid gray 3px;
   padding: 0;
@@ -98,9 +103,15 @@ section.bar {
   z-index: 1;
 }
 
+#OrderTotalsWidget {min-height:113px;}
 #OrderTotalsWidget .total {font-size: 45px;float:right;color:#fff;text-shadow: black 2px 2px 0px;}
 #OrderTotalsWidget .placed_total {float:right;font-size:20px;}
 #OrderTotalsWidget strong {float:left;line-height:3;}
+
+#ChatWidget {padding-bottom:0;}
+#ChatWidget .messages {height: 87px;overflow:auto;margin-right:10px;}
+#ChatWidget strong {text-shadow: black 2px 2px 0px;color:#fff;}
+
 /* Event types */
 .pending_order { background-color: orange; color: #eee;}
 .login { background-color: green; color: #eee;}

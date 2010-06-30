@@ -4,7 +4,6 @@ Widgets.LineChartWidget = (function(){
   var server, 
       chart,
       container,
-      self,
       counts = {},
       events = [],
       current_interval = 0,
@@ -37,26 +36,24 @@ Widgets.LineChartWidget = (function(){
           vAxis: {maxValue: 10}}
         );
       };
-      
+  
+  function update(evt, event_name, event_data){
+    addEvent(event_name, event_data);
+    updateChart();
+  }
+        
   var klass = function(event_stream, container_element){
     server    = event_stream;
     container = container_element;
-    self = this;
     
     window.setInterval(function(){
       current_interval++;
     },5000);
     
-    server.bind('all', function(evt, evt_name, data){        
-      self.update(evt_name, data)
-    });
-  };
-  
-  klass.prototype = {
-    update: function(event_name, event_data){
-      addEvent(event_name, event_data);
-      updateChart();
-    }
+    // server.bind_all(update);
+    $.each(['order_placed', 'order_cancelled', 'order_shipped', 'order_closed'], function(i,e){
+      server.bind(e, update)
+    })
   };
   return klass;
 })();
