@@ -4,45 +4,77 @@
 	<meta charset="UTF-8">
   <link rel="stylesheet" href="./css/master.css" />
   <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAyL0lilqipZ1bgXkqU4XI8xTC22cZz2M43xY8GdkXMoA42UqnkxQzkd8Tn8HyWfQ9QwkxX5HZ24de4A&sensor=false" type="text/javascript"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" charset="utf-8" src="./js/app.js"></script>
   <script type="text/javascript">
-    
+    var MAP;
     var active_widgets = {},
         Widgets = {},
-        server = null;
+        server = new StubEventStream();
     
     $(function(){
       for(widget_name in Widgets){
-        if(document.getElementById(widget_name) != null)
-          active_widgets[widget_name] = new Widgets[widget_name](server, widget_name);
+        active_widgets[widget_name] = new Widgets[widget_name](server, widget_name);
       }
-      // active_widgets.LineChartWidget.update('Event 1',1)
     });
   </script>
   <script type="text/javascript" src="./widgets/line_chart.js"></script>
   <script type="text/javascript" src="./widgets/activity.js"></script>
+  <script type="text/javascript" src="./widgets/location.js"></script>
+  <script type="text/javascript" src="./widgets/controls.js"></script>
+  <script type="text/javascript" src="./widgets/order_totals.js"></script>
+  <script type="text/javascript" src="./widgets/chat.js"></script>
 	<title>Websockets Activity Board</title>
 </head>
-<body onload="init()" onunload="GUnload()">
+<body>
   <div id="wrapper">
     
-    <div id="map">
-
-    </div><!-- /map -->
+    <div id="LocationWidget"></div>
 
     <div id="main" class="clearfix">
+      
+      <div class="column narrow">
+        <section class="bar activity">
+          <h2>Activity</h2>
+          <div class="widget" id="ActivityWidget"></div>
+        </section><!-- /activity -->
+        
+        <section class="bar data">
+          <h2>Simulation</h2>
+          <div class="widget" id="ControlsWidget"></div>
+        </section><!-- /data controls -->
+      </div>
+      
+      <div class="column wide">
+        <section class="bar stats">
+          <h2>Stats</h2>
+          <div class="widget" id="LineChartWidget"></div>
+          
+          <h2>Totals</h2>
+          <div class="widget" id="OrderTotalsWidget">
+            <div class="clearfix">
+              <strong>Placed orders:</strong> <span class="placed_total">$<span class="placed_amount">0</span></span>
+            </div>
+            <div class="clearfix">
+              <strong>Cancelled orders:</strong> <span class="placed_total">$<span class="cancelled_amount">0</span></span>
+            </div>
+            <div class="clearfix">
+              <strong>Closed orders:</strong> <span class="total">$<span class="closed_amount">0</span></span>
+            </div>
+          </div>
+        </section><!-- /stats -->
+        
+        <section class="bar chat">
+          <h2>Chatter</h2>
+          <div class="widget" id="ChatWidget">            
+            <ul class="messages">
 
-      <section class="bar activity">
-        <h2>Activity</h2>
-        <div class="widget" id="ActivityWidget"></div>
-      </section><!-- /events -->
-
-      <section class="bar stats">
-        <h2>Stats</h2>
-        <div class="widget" id="LineChartWidget"></div>
-      </section>
+            </ul>
+          </div>
+        </section><!-- /data controls -->
+        
+      </div>
+      
     </div>
     
   </div>

@@ -36,22 +36,24 @@ Widgets.LineChartWidget = (function(){
           vAxis: {maxValue: 10}}
         );
       };
-      
-  var klass = function(socket_server, container_element){
-    server    = socket_server;
+  
+  function update(evt, event_name, event_data){
+    addEvent(event_name, event_data);
+    updateChart();
+  }
+        
+  var klass = function(event_stream, container_element){
+    server    = event_stream;
     container = container_element;
     
     window.setInterval(function(){
       current_interval++;
     },5000);
-    // chart     = new google.visualization.LineChart(document.getElementById(container));
-  };
-  
-  klass.prototype = {
-    update: function(event_name, event_data){
-      addEvent(event_name, event_data);
-      updateChart();
-    }
+    
+    // server.bind_all(update);
+    $.each(['order_placed', 'order_cancelled', 'order_shipped', 'order_closed'], function(i,e){
+      server.bind(e, update)
+    })
   };
   return klass;
 })();
