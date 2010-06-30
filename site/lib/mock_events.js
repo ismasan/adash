@@ -73,7 +73,7 @@ exports.StubEventStream = (function(){
   // 51.5256013 -0.109946
       
   function randomEvent(){
-    var type = ['order','contact','order','order', 'contact', 'order', 'chat', 'order'][Math.round(Math.random(7))]
+    var type = ['chat','contact','order'][Math.floor(Math.random(3)*3)]
     return Stubs[type]();
   }
   
@@ -92,7 +92,7 @@ exports.StubEventStream = (function(){
     },
 
     play: function(){
-      sys.puts('Bradcasting mock messages')
+      sys.puts('Broadcasting mock messages')
       interval = setInterval(
         function(){
           callback(randomEvent())
