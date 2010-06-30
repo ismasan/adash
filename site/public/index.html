@@ -23,6 +23,7 @@
   <script type="text/javascript" src="./widgets/activity.js"></script>
   <script type="text/javascript" src="./widgets/location.js"></script>
   <script type="text/javascript" src="./widgets/controls.js"></script>
+  <script type="text/javascript" src="./widgets/order_totals.js"></script>
 	<title>Websockets Activity Board</title>
 </head>
 <body onunload="GUnload()">
@@ -30,24 +31,35 @@
     
     <div id="LocationWidget"></div>
 
-    <div id="main">
-      <div class="row row1 clearfix">        
+    <div id="main" class="clearfix">
+      
+      <div class="column narrow">
         <section class="bar activity">
           <h2>Activity</h2>
           <div class="widget" id="ActivityWidget"></div>
         </section><!-- /activity -->
-      
-        <section class="bar stats">
-          <h2>Stats</h2>
-          <div class="widget" id="LineChartWidget"></div>
-        </section>
-      </div>
-      
-      <div class="row clearfix">
+        
         <section class="bar data">
           <h2>Simulation</h2>
           <div class="widget" id="ControlsWidget"></div>
         </section><!-- /data controls -->
+      </div>
+      
+      <div class="column wide">
+        <section class="bar stats">
+          <h2>Stats</h2>
+          <div class="widget" id="LineChartWidget"></div>
+          
+          <h2>Totals</h2>
+          <div class="widget" id="OrderTotalsWidget">
+            <div class="clearfix">
+              <strong>Placed orders:</strong> <span class="placed_total">$<span class="placed_amount">0</span></span>
+            </div>
+            <div class="clearfix">
+              <strong>Closed orders:</strong> <span class="total">$<span class="closed_amount">0</span></span>
+            </div>
+          </div>
+        </section><!-- /stats -->
       </div>
       
     </div>

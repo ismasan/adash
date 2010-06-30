@@ -31,18 +31,19 @@ li h4 { margin-top: 0; }
 section.bar {
   position:relative;
   z-index:1000;
-  float:left;
-  margin: 0 10px 10px 0;
+  display:block;
   -webkit-box-shadow: black 0 2px 4px;
   border-radius: 5px;
   background: #333;
-  width: 300px;
+  padding: 12px 0;
+  margin-bottom:10px;
 }
-.row1 .bar {min-height: 400px;}
-.row {display:block!important;}
-.bar.stats { width:440px; }
+.column {float:left;margin-right:10px;}
+.column.narrow {width: 300px;}
+.column.wide {width:440px;}
 
 .widget {padding:0 20px 20px 20px;}
+
 .bar .list {
   list-style-type: none;
   margin-left:0;
@@ -59,7 +60,7 @@ section.bar {
   background-color:#5A5A5A;
 }
 .bar h2 {
-  margin: 12px 15px;
+  margin: 0 15px 15px 15px;
   background: #1F1F1F;
   color: #eee;
   font-size: 16px;
@@ -74,11 +75,13 @@ section.bar {
   overflow: hidden;
   border-bottom: solid gray 3px;
   padding: 0;
-  margin: 0px 20px 20px;
+  margin: 0px 20px;
 }
 #ActivityWidget li:hover { color:white; }
-#ActivityWidget .order_shipped { background-color: #1D6417;}
-#ActivityWidget .order_shipped:hover { background-color: #26851F;}
+#ActivityWidget .order_closed { background-color: #1D6417;}
+#ActivityWidget .order_closed:hover { background-color: #26851F;}
+#ActivityWidget .order_shipped { background-color: #0F2964;}
+#ActivityWidget .order_shipped:hover { background-color: #133687;}
 #ActivityWidget .order_placed { background-color: #5F5B16;}
 #ActivityWidget .order_placed:hover { background-color: #847E1F;}
 #ActivityWidget .order_cancelled { background-color: #662D08;}
@@ -95,6 +98,9 @@ section.bar {
   z-index: 1;
 }
 
+#OrderTotalsWidget .total {font-size: 45px;float:right;color:#fff;text-shadow: black 2px 2px 0px;}
+#OrderTotalsWidget .placed_total {float:right;font-size:20px;}
+#OrderTotalsWidget strong {float:left;line-height:3;}
 /* Event types */
 .pending_order { background-color: orange; color: #eee;}
 .login { background-color: green; color: #eee;}
@@ -109,7 +115,7 @@ section.bar {
 }
  
 .clearfix {
-	display: inline-block;
+	
 }
  
 html[xmlns] .clearfix {

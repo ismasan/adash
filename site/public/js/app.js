@@ -12,7 +12,7 @@ StubEventStream = (function(){
     long: function(){var l = Stubs.longs.length-1; return Stubs.longs[Math.round(Math.random(l)*l)]},
     
     order: function(){
-      var names = ['order_placed', 'order_started', 'order_cancelled', 'order_shipped'];
+      var names = ['order_placed', 'order_cancelled', 'order_shipped', 'order_closed'];
       var infos = ['2 products', '1 product', '5 products'];
       return {
         name: names[Math.round(Math.random(3)*3)],
