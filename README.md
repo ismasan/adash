@@ -1,10 +1,11 @@
 # intro to websockets
 
-# Explain project: panic dashboard (show)
-
 # simple socket server (Node JS)
 
-# simple client-side example: raw socket messages
+# Simple websockets example (/simple.html)
+
+# Explain project: panic dashboard (show)
+- problems: different events
 
 # Design a protocol
 - xmpp? Stomp?

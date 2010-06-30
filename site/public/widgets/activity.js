@@ -4,7 +4,7 @@ Widgets.ActivityWidget = (function(){
   
   var $template = $('<ul class="list events"></ul>');
   
-  function update(evt, event_name, data){
+  function update(event_name, data){
     var line = '<li class="'+event_name+'">';
         line  += '<h4>' + event_name + '</h4>';
         line  += (data.event_date + ' - ' + data.info);

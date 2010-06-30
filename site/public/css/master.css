@@ -74,6 +74,8 @@ section.bar {
 #LineChartWidget {min-height:206px;}
 
 #ControlsWidget {padding-bottom:0;}
+#ControlsWidget .status { text-shadow: black 0px 1px 0px; color:#A90D0B; display:inline-block;margin-left:2em; }
+#ControlsWidget .status.running {color:green;}
 
 #ActivityWidget {
   height: 488px;

@@ -37,7 +37,7 @@ Widgets.LineChartWidget = (function(){
         );
       };
   
-  function update(evt, event_name, event_data){
+  function update(event_name, event_data){
     addEvent(event_name, event_data);
     updateChart();
   }
@@ -52,7 +52,9 @@ Widgets.LineChartWidget = (function(){
     
     // server.bind_all(update);
     $.each(['order_placed', 'order_cancelled', 'order_shipped', 'order_closed'], function(i,e){
-      server.bind(e, update)
+      server.bind(e, function(data){
+        update(e,data);
+      })
     })
   };
   return klass;
