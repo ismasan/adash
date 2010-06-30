@@ -5,28 +5,6 @@ var ws = require('./lib/node-websocket-server/lib/ws');
 /*-----------------------------------------------
   logging:
 -----------------------------------------------*/
-// var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-// 
-// function pad(n) {
-//   return n < 10 ? '0' + n.toString(10) : n.toString(10);
-// }
-// 
-// function timestamp() {
-//   var d = new Date();
-//   return [
-//     d.getDate(),
-//     months[d.getMonth()],
-//     [ pad(d.getHours())
-//     , pad(d.getMinutes())
-//     , pad(d.getSeconds())
-//     , (d.getTime() + "").substr( - 4, 4)
-//     ].join(':')
-//   ].join(' ');
-// };
-// 
-// function log(msg) {
-//   sys.puts(timestamp() + ' - ' + msg.toString());
-// };
  function log(msg) {
    sys.puts(msg.toString());
  };
@@ -48,25 +26,28 @@ server.addListener("connection", function(conn){
   log("opened connection: "+conn._id);
   
   server.send(conn._id, "Connected as: "+conn._id);
-  server.broadcast("<"+conn._id+"> connected");
+  server.broadcast("["+conn._id+"] connected");
   
   conn.addListener("message", function(message){
     log("<"+conn._id+"> "+message);
-    server.broadcast("<"+conn._id+"> "+message);
+    server.broadcast("["+conn._id+"] "+message);
   });
 });
 
 server.addListener("close", function(conn){
   log("closed connection: "+conn._id);
-  server.broadcast("<"+conn._id+"> disconnected");
+  server.broadcast("["+conn._id+"] disconnected");
 });
 
 // Handle HTTP Requests:
-// server.addListener("request", function(req, res){
-//   res.writeHead(200, {'Content-Type': 'text/plain'});
-//   res.end('We can handle normal http connections too!\n');
-// });
-// 
+server.addListener("request", function(req, res){
+  req.addListener('data', function(data){
+    server.broadcast('[http] '+ data)
+  });
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Message aknowledged\n');
+});
+
 // server.addListener("shutdown", function(conn){
 //   // never actually happens, because I never tell the server to shutdown.
 //   log("Server shutdown");
@@ -81,4 +62,4 @@ server.addListener("close", function(conn){
 
 
 
-server.listen(8000, "localhost");
+server.listen(8000, "ismasan.local");
