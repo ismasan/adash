@@ -30,7 +30,7 @@ server.addListener("connection", function(conn){
   
   conn.addListener("message", function(message){
     log("<"+conn._id+"> "+message);
-    server.broadcast("["+conn._id+"] "+message);
+    server.broadcast(message);
   });
 });
 

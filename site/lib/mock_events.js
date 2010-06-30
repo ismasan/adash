@@ -26,7 +26,7 @@ exports.StubEventStream = (function(){
       var names = ['order_placed', 'order_cancelled', 'order_shipped', 'order_closed'];
       var infos = ['2 products', '1 product', '5 products'];
       return {
-        name: names[Math.round(Math.random(3)*3)],
+        event: names[Math.round(Math.random(3)*3)],
         data: {
           event_date: Stubs.now(),
           info: infos[Math.round(Math.random(2)*2)],
@@ -39,7 +39,7 @@ exports.StubEventStream = (function(){
     contact: function(){
       var infos = ['John Doe', 'Jean Doe', 'Ismael Celis', 'Makoto Inoue', 'Mark Evans', 'Max Williams'];
       return {
-        name: 'contact_received',
+        event: 'contact_received',
         data: {
           event_date: Stubs.now(),
           info: infos[Math.round(Math.random(5)*5)],
@@ -60,7 +60,7 @@ exports.StubEventStream = (function(){
       var infos = ['John Doe', 'Jean Doe', 'Ismael Celis', 'Makoto Inoue', 'Mark Evans', 'Max Williams'];
       
       return {
-        name: 'chat_message',
+        event: 'chat_message',
         data: {
           event_date: Stubs.now(),
           info: infos[Math.round(Math.random(5)*5)],
@@ -105,14 +105,6 @@ exports.StubEventStream = (function(){
     
     isRunning: function(){
       return running;
-    },
-    
-    bind: function(evt_name, handler){
-      $(self).bind(evt_name, handler);
-    },
-    
-    bind_all: function(handler){
-      this.bind('all', handler)
     }
   };
   
