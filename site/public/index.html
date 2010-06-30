@@ -4,43 +4,52 @@
 	<meta charset="UTF-8">
   <link rel="stylesheet" href="./css/master.css" />
   <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAyL0lilqipZ1bgXkqU4XI8xTC22cZz2M43xY8GdkXMoA42UqnkxQzkd8Tn8HyWfQ9QwkxX5HZ24de4A&sensor=false" type="text/javascript"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript" charset="utf-8" src="./js/app.js"></script>
   <script type="text/javascript">
-    
+    var MAP;
     var active_widgets = {},
         Widgets = {},
-        server = null;
+        server = new StubEventStream();
     
     $(function(){
       for(widget_name in Widgets){
         if(document.getElementById(widget_name) != null)
           active_widgets[widget_name] = new Widgets[widget_name](server, widget_name);
       }
-      // active_widgets.LineChartWidget.update('Event 1',1)
     });
   </script>
   <script type="text/javascript" src="./widgets/line_chart.js"></script>
   <script type="text/javascript" src="./widgets/activity.js"></script>
   <script type="text/javascript" src="./widgets/location.js"></script>
+  <script type="text/javascript" src="./widgets/controls.js"></script>
 	<title>Websockets Activity Board</title>
 </head>
-<body>
+<body onunload="GUnload()">
   <div id="wrapper">
     
     <div id="LocationWidget"></div>
 
-    <div id="main" class="clearfix">
-      <section class="bar activity">
-        <h2>Activity</h2>
-        <div class="widget" id="ActivityWidget"></div>
-      </section><!-- /events -->
-
-      <section class="bar stats">
-        <h2>Stats</h2>
-        <div class="widget" id="LineChartWidget"></div>
-      </section>
+    <div id="main">
+      <div class="row row1 clearfix">        
+        <section class="bar activity">
+          <h2>Activity</h2>
+          <div class="widget" id="ActivityWidget"></div>
+        </section><!-- /activity -->
+      
+        <section class="bar stats">
+          <h2>Stats</h2>
+          <div class="widget" id="LineChartWidget"></div>
+        </section>
+      </div>
+      
+      <div class="row clearfix">
+        <section class="bar data">
+          <h2>Simulation</h2>
+          <div class="widget" id="ControlsWidget"></div>
+        </section><!-- /data controls -->
+      </div>
+      
     </div>
     
   </div>

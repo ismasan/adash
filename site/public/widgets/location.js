@@ -1,17 +1,20 @@
+google.load("maps","3", {"other_params":"sensor=true"});
 Widgets.LocationWidget = (function(){
   
-  var server, container;
-  var MAP;
+  var server, container, bounds, self;
+  // var MAP;
   var USERS = {};
   
   var buildMap = function(lat, longi, callback){
     var callback = callback || function(map){};
-    // if (!GBrowserIsCompatible()) return false;
     var maps_div = document.getElementById(container);
-    MAP = new GMap2(maps_div);
-    MAP.setCenter(new GLatLng(lat, longi), 13);
-    MAP.setUIToDefault();
-    //map.setMapType(G_HYBRID_MAP);
+    var options = {
+      zoom: 11, 
+      center: new google.maps.LatLng(lat, longi),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    
+    MAP = new google.maps.Map(maps_div, options);
     callback(MAP);
   };
 
@@ -24,35 +27,68 @@ Widgets.LocationWidget = (function(){
       // Get the current location    
       navigator.geolocation.getCurrentPosition(function(position){
         buildMap(position.coords.latitude, position.coords.longitude);
-        addMarker(position.coords.latitude, position.coords.longitude, 'Ismael');
+        addMarker(position.coords.latitude, position.coords.longitude, 'You are here');
       });
       return false;
     }
   };
-
+  
+  var pan_interval;
+  var markers = {};
+  
   function addMarker(lat, lon, label){
-    var point = new GLatLng(lat,lon),
-        marker = new GMarker(point);
-    GEvent.addListener(marker, "click", function() {
-      marker.openInfoWindowHtml(label);
+    var key = (lat + lon) + 'marker' + label,
+        marker;
+    if(markers[key])
+      return markers[key]
+    
+    var point = new google.maps.LatLng(lat,lon);
+    marker = new google.maps.Marker({
+        position: point, 
+        map: MAP,
+        title:label
+    });
+    var infowindow = new google.maps.InfoWindow(
+        { content: label, disableAutoPan:false,
+          size: new google.maps.Size(50,50)
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+      $(document).trigger('info_open:location', [infowindow]);
+      infowindow.open(MAP,marker);
     });
     setTimeout(function(){
-      marker.openInfoWindowHtml(label);
+      $(document).trigger('info_open:location', [infowindow]);
+      infowindow.open(MAP,marker);
     },500);
-    MAP.setCenter(point, 13);
-    MAP.addOverlay(marker);
+    bounds.extend(point)
+    MAP.fitBounds(bounds);
+    // Close info when other info open
+    $(document).bind('info_open:location', function(event, info){
+      if(info != infowindow) infowindow.close();
+    });
+    markers[key] = marker;
+    // Adjust map to the left after 4 seconds
+    // window.clearTimeout(pan_interval);
+    //     pan_interval = window.setTimeout(function(){
+    //       MAP.panBy(300, 0);
+    //     }, 4000);
   }
   
-  var klass = function(socket_server, container_element){
-    server = socket_server;
+  var klass = function(event_stream, container_element){
+    server = event_stream;
     container = container_element;
-    
+    self = this;
+    bounds = new google.maps.LatLngBounds();
     findLoc();
+    
+    server.bind('order_placed order_shipped contact_received', function(evt, evt_name, data){        
+      self.update(evt_name, data)
+    });
   };
   
   klass.prototype = {
     update: function(event_name, data){
-      addMarker(data.latitude, data.longitude, event_name);
+      addMarker(data.latitude, data.longitude, event_name + '<br />' + data.info);
     }
   };
   

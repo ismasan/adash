@@ -4,6 +4,7 @@ Widgets.LineChartWidget = (function(){
   var server, 
       chart,
       container,
+      self,
       counts = {},
       events = [],
       current_interval = 0,
@@ -37,14 +38,18 @@ Widgets.LineChartWidget = (function(){
         );
       };
       
-  var klass = function(socket_server, container_element){
-    server    = socket_server;
+  var klass = function(event_stream, container_element){
+    server    = event_stream;
     container = container_element;
+    self = this;
     
     window.setInterval(function(){
       current_interval++;
     },5000);
-    // chart     = new google.visualization.LineChart(document.getElementById(container));
+    
+    server.bind('all', function(evt, evt_name, data){        
+      self.update(evt_name, data)
+    });
   };
   
   klass.prototype = {

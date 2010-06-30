@@ -32,14 +32,14 @@ section.bar {
   position:relative;
   z-index:1000;
   float:left;
-  margin: 0 10px 0 0;
+  margin: 0 10px 10px 0;
   -webkit-box-shadow: black 0 2px 4px;
   border-radius: 5px;
   background: #333;
   width: 300px;
-  min-height: 400px;
 }
-
+.row1 .bar {min-height: 400px;}
+.row {display:block!important;}
 .bar.stats { width:440px; }
 
 .widget {padding:0 20px 20px 20px;}
@@ -76,6 +76,13 @@ section.bar {
   padding: 0;
   margin: 0px 20px 20px;
 }
+#ActivityWidget li:hover { color:white; }
+#ActivityWidget .order_shipped { background-color: #1D6417;}
+#ActivityWidget .order_shipped:hover { background-color: #26851F;}
+#ActivityWidget .order_placed { background-color: #5F5B16;}
+#ActivityWidget .order_placed:hover { background-color: #847E1F;}
+#ActivityWidget .order_cancelled { background-color: #662D08;}
+#ActivityWidget .order_cancelled:hover { background-color: #93410C;}
 
 #LocationWidget {
   position: absolute;
