@@ -69,7 +69,7 @@ Widgets.LocationWidget = (function(){
     markers[key] = marker;
   }
   
-  function update(evt, event_name, data){
+  function update(event_name, data){
     addMarker(data.latitude, data.longitude, event_name + '<br />' + data.info);
   }
   
@@ -79,7 +79,12 @@ Widgets.LocationWidget = (function(){
     bounds = new google.maps.LatLngBounds();
     findLoc();
     
-    server.bind('order_placed order_shipped contact_received', update);
+    $.each(['order_placed', 'order_shipped', 'contact_received'], function(i,e){
+      server.bind(e, function(data){
+        update(e,data);
+      })
+    })
+    
   };
   
   return klass;

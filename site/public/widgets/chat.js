@@ -2,7 +2,7 @@ Widgets.ChatWidget = (function(){
   
   var server, container, list;
   
-  function update(evt, evt_name, data){
+  function update(data){
     list.prepend('<li><strong>'+data.info+':</strong> <span>'+data.message+'</span></li>');
   };
   
@@ -10,10 +10,11 @@ Widgets.ChatWidget = (function(){
     var form = $('<form id="chat_form"><input type="text" name="user" placeholder="User name" /><input type="text" name="message" placeholder="message" /></form>');
     container.append(form);
     form.submit(function(){
-      $(server).trigger('chat_message', ['chat_message', {
+      server.trigger('chat_message', {
+        event_date: Utils.now(),
         info: form.find('input[name=user]').val(),
         message: form.find('input[name=message]').val()
-      }]);
+      });
       form.find('input[name=message]').val('').focus();
       return false;
     })

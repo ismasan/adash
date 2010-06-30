@@ -29,13 +29,13 @@ Widgets.OrderTotalsWidget = (function(){
     $placed_amount = container.find('.placed_amount');
     $cancelled_amount = container.find('.cancelled_amount');
     // Bind to server events
-    server.bind('order_closed', function(evt, evt_name, data){        
+    server.bind('order_closed', function(data){        
       updateClosed(data.total)
     });
-    server.bind('order_placed', function(evt, evt_name, data){       
+    server.bind('order_placed', function(data){       
       updatePlaced(data.total)
     });
-    server.bind('order_cancelled', function(evt, evt_name, data){       
+    server.bind('order_cancelled', function(data){       
       updateCancelled(data.total)
     });
   };
