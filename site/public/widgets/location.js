@@ -1,7 +1,7 @@
 google.load("maps","3", {"other_params":"sensor=true"});
 Widgets.LocationWidget = (function(){
   
-  var server, container, bounds;
+  var server, container, bounds, max_markers = 10, all_markers = [];
   // var MAP;
   var USERS = {};
   
@@ -11,7 +11,9 @@ Widgets.LocationWidget = (function(){
     var options = {
       zoom: 11, 
       center: new google.maps.LatLng(lat, longi),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      navigationControl: false,
+      mapTypeControl: false
     }
     
     MAP = new google.maps.Map(maps_div, options);
@@ -67,6 +69,11 @@ Widgets.LocationWidget = (function(){
       if(info != infowindow) infowindow.close();
     });
     markers[key] = marker;
+    all_markers.push(marker);
+    if(all_markers.length > max_markers){
+      all_markers.shift().setMap(null) // delete marker;
+      delete markers[key];
+    }
   }
   
   function update(event_name, data){
