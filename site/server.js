@@ -5,9 +5,9 @@ var ws = require('./lib/node-websocket-server/lib/ws');
 /*-----------------------------------------------
   logging:
 -----------------------------------------------*/
- function log(msg) {
-   sys.puts(msg.toString());
- };
+function log(msg) {
+  sys.puts(msg.toString());
+};
 
 
 /*-----------------------------------------------
@@ -48,18 +48,16 @@ server.addListener("request", function(req, res){
   res.end('Message aknowledged\n');
 });
 
-// server.addListener("shutdown", function(conn){
-//   // never actually happens, because I never tell the server to shutdown.
-//   log("Server shutdown");
-// });
 
+function MockEvents(){
+  var stubs = require('./lib/mock_events');
+  stream = new stubs.StubEventStream(function(e){
+    server.broadcast(JSON.stringify(e))
+  }).play();
+};
 
 /*-----------------------------------------------
   Server:
 -----------------------------------------------*/
-
-
-
-
-
+MockEvents();
 server.listen(8000, "ismasan.local");
