@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="ru-RU">
+<head>
+	<meta charset="UTF-8">
+	<title>Simple WS</title>
+	<link rel="stylesheet" href="/css/simple.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript">
+  
+    var socket = new WebSocket('ws://ismasan.local:8000');
+    
+    function message(msg){
+      $('#messages').prepend('<li>'+msg+'</li>');
+    };
+    
+    socket.onopen = function(evt){
+      message('Socket connected!');
+    };
+    
+    socket.onclose = function(evt){
+      message('Socket closed!');
+    }
+    
+    socket.onmessage = function(evt){
+      message(evt.data);
+    }
+    
+    $(function(){
+      $('#chat').submit(function(){
+        var user_name = $(this).find('input[name=user_name]').val(),
+            message = $(this).find('input[name=message]').val();
+        socket.send(user_name+' says: '+ message);
+        $(this).find('input[name=message]').val('').focus();
+        return false;
+      });
+    })
+    
+  </script>
+</head>
+<body>
+  <div id="wrapper">
+    <h1>Websockets chat</h1>
+    <form id="chat">
+      <input type="text" name="user_name" placeholder="user name" />
+      <input type="text" name="message" placeholder="message" />
+    </form>
+    
+  	<ul id="messages">
+	  
+  	</ul>
+  	
+  </div>
+</body>
+</html>
