@@ -5,7 +5,7 @@ exports.Utils = {
         m = D.getMonth(),
         d = D.getDate(),
         h = D.getHours(),
-        m = D.getMinutes();
-    return y+'/'+m+'/'+d+' '+h+':'+m;
+        mins = D.getMinutes();
+    return y+'/'+m+'/'+d+' '+h+':'+mins;
   }
 };
