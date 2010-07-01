@@ -75,4 +75,4 @@ function MockEvents(seconds){
   Server:
 -----------------------------------------------*/
 MockEvents(3);// mock events every x seconds
-server.listen(8000, "ismasan.local");
+server.listen(8000, "localhost");

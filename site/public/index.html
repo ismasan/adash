@@ -10,7 +10,10 @@
     var MAP;
     var active_widgets = {},
         Widgets = {},
-        server = new ServerEventsDispatcher('ws://ismasan.local:8000');
+        /* The server can be anything that emits events in the format {event:"event name", data: {}}
+        Look in js/app.js for StubEventsDispatcher for a mock event emitter.
+        -----------------------------------------------------------*/
+        server = new StubEventsDispatcher('ws://localhost:8000');
     
     $(function(){
       for(widget_name in Widgets){
