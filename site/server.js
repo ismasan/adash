@@ -1,5 +1,6 @@
 var sys = require("sys");
 var ws = require('./lib/node-websocket-server/lib/ws');
+var now = require('./lib/utils').Utils.now;
 
 
 /*-----------------------------------------------
@@ -13,12 +14,12 @@ function log(msg) {
   Format message:
 -----------------------------------------------*/
 function jsonMessage(event_name, data){
-  data['event_date'] = new Date().toString();
+  data['event_date'] = now();
   return JSON.stringify({
     event: event_name,
     data: data
   });
-}
+};
 /*-----------------------------------------------
   Spin up our server:
 -----------------------------------------------*/
@@ -73,5 +74,5 @@ function MockEvents(seconds){
 /*-----------------------------------------------
   Server:
 -----------------------------------------------*/
-// MockEvents(3);// mock events every x seconds
+MockEvents(3);// mock events every x seconds
 server.listen(8000, "ismasan.local");
