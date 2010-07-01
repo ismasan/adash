@@ -6,13 +6,16 @@
 	<link rel="stylesheet" href="/css/simple.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script type="text/javascript">
-  
-    var socket = new WebSocket('ws://ismasan.local:8000');
     
+    // Utilities
     function message(msg){
       $('#messages').prepend('<li>'+msg+'</li>');
     };
     
+    // Connect to server
+    var socket = new WebSocket('ws://ismasan.local:8000');
+    
+    // Add listeners
     socket.onopen = function(evt){
       message('Socket connected!');
     };
@@ -25,12 +28,13 @@
       message(evt.data);
     }
     
+    // Chat form
     $(function(){
       $('#chat').submit(function(){
-        var user_name = $(this).find('input[name=user_name]').val(),
-            message = $(this).find('input[name=message]').val();
-        socket.send(user_name+' says: '+ message);
-        $(this).find('input[name=message]').val('').focus();
+        var message   = $(this).find('input[name=message]');
+        var user_name = $(this).find('input[name=user_name]');
+        socket.send(user_name.val()+' says: '+ message.val());
+        message.val('').focus();
         return false;
       });
     })
@@ -40,10 +44,11 @@
 <body>
   <div id="wrapper">
     <h1>Websockets chat</h1>
+    
     <form id="chat">
       <input type="text" name="user_name" placeholder="user name" />
       <input type="text" name="message" placeholder="message" />
-    </form>
+    </form><!-- /chat form -->
     
   	<ul id="messages">
 	  
