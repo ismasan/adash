@@ -9,7 +9,16 @@ function log(msg) {
   sys.puts(msg.toString());
 };
 
-
+/*-----------------------------------------------
+  Format message:
+-----------------------------------------------*/
+function jsonMessage(event_name, data){
+  data['event_date'] = new Date().toString();
+  return JSON.stringify({
+    event: event_name,
+    data: data
+  });
+}
 /*-----------------------------------------------
   Spin up our server:
 -----------------------------------------------*/
@@ -25,9 +34,14 @@ server.addListener("listening", function(){
 server.addListener("connection", function(conn){
   log("opened connection: "+conn._id);
   
-  server.send(conn._id, "Connected as: "+conn._id);
-  server.broadcast("["+conn._id+"] connected");
+  var msg = jsonMessage('user_connected', {
+    info: conn._id
+  });
   
+  server.send(msg);
+  server.broadcast(msg);
+  
+  // Just echo whatever is sent.
   conn.addListener("message", function(message){
     log("<"+conn._id+"> "+message);
     server.broadcast(message);
@@ -36,7 +50,7 @@ server.addListener("connection", function(conn){
 
 server.addListener("close", function(conn){
   log("closed connection: "+conn._id);
-  server.broadcast("["+conn._id+"] disconnected");
+  server.broadcast(jsonMessage('user_disconnected', {info: conn._id}));
 });
 
 // Handle HTTP Requests:
@@ -59,5 +73,5 @@ function MockEvents(seconds){
 /*-----------------------------------------------
   Server:
 -----------------------------------------------*/
-MockEvents(3);// mock events every x seconds
+// MockEvents(3);// mock events every x seconds
 server.listen(8000, "ismasan.local");
