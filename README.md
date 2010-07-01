@@ -7,4 +7,4 @@ Example Node sockets server:
 
 Just open in in your browser
 
-    site/index.html
+    site/public/index.html
