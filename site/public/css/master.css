@@ -63,7 +63,7 @@ section.bar {
 }
 .bar.chat {clear:left;}
 /*:::::::::::::::::::::::::::::: Widgets :::::::::::::::::::::::::::::::::::::*/
-#LineChartWidget {min-height:220px;padding-bottom:0;}
+.chart {min-height:220px;padding-bottom:0;}
 
 #ControlsWidget {padding-bottom:0;}
 #ControlsWidget .status { text-shadow: black 0px 1px 0px; color:#A90D0B; display:inline-block;margin-left:2em; }
