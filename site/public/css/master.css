@@ -63,7 +63,7 @@ section.bar {
 }
 .bar.chat {clear:left;}
 /*:::::::::::::::::::::::::::::: Widgets :::::::::::::::::::::::::::::::::::::*/
-.chart {min-height:220px;padding-bottom:0;}
+.chart {min-height:206px;padding-bottom:0;}
 
 #ControlsWidget {padding-bottom:0;}
 #ControlsWidget .status { text-shadow: black 0px 1px 0px; color:#A90D0B; display:inline-block;margin-left:2em; }
@@ -109,7 +109,7 @@ section.bar {
 #OrderTotalsWidget strong {float:left;line-height:3;}
 
 #ChatWidget {padding-bottom:0;}
-#ChatWidget .messages {height: 50px;overflow:auto;margin-right:10px;}
+#ChatWidget .messages {height: 64px;overflow:auto;margin-right:10px;}
 #ChatWidget strong {text-shadow: black 2px 2px 0px;color:#fff;}
 
 /* Event types */
