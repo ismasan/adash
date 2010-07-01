@@ -21,7 +21,7 @@ Widgets.LocationWidget = (function(){
   };
 
 
-  function findLoc(){
+  function initUserLocation(){
     if (!navigator.geolocation) {
       alert('Sorry, your browser does not support Geo Services');
     }
@@ -84,7 +84,7 @@ Widgets.LocationWidget = (function(){
     server = event_stream;
     container = container_element;
     bounds = new google.maps.LatLngBounds();
-    findLoc();
+    initUserLocation();
     
     $.each(['order_placed', 'order_shipped', 'contact_received'], function(i,e){
       server.bind(e, function(data){
