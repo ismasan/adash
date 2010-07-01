@@ -14,14 +14,16 @@ exports.StubEventStream = (function(){
     lat: function(){var l = Stubs.lats.length-1; return Stubs.lats[Math.round(Math.random(l)*l)]},
     long: function(){var l = Stubs.longs.length-1; return Stubs.longs[Math.round(Math.random(l)*l)]},
     
+    index: function(size){return Math.round(Math.random(size)*size)},
+    
     order: function(){
       var names = ['order_placed', 'order_cancelled', 'order_shipped', 'order_closed'];
       var infos = ['2 products', '1 product', '5 products'];
       return {
-        event: names[Math.round(Math.random(3)*3)],
+        event: names[Stubs.index(3)],
         data: {
           event_date: now(),
-          info: infos[Math.round(Math.random(2)*2)],
+          info: infos[Stubs.index(2)],
           total: Math.random(10)*100,
           latitude: Stubs.lat(),
           longitude: Stubs.long()
@@ -29,12 +31,12 @@ exports.StubEventStream = (function(){
       };
     },
     contact: function(){
-      var infos = ['John Doe', 'Jean Doe', 'Ismael Celis', 'Makoto Inoue', 'Mark Evans', 'Max Williams'];
+      var infos = ['John Doe', 'Jean Doe', 'Dr. Doolittle', 'Barack Obama', 'Corey88', 'Napoleon', 'Bruce Wayne'];
       return {
         event: 'contact_received',
         data: {
           event_date: now(),
-          info: infos[Math.round(Math.random(5)*5)],
+          info: infos[Stubs.index(6)],
           latitude: Stubs.lat(),
           longitude: Stubs.long()
         }
@@ -46,17 +48,19 @@ exports.StubEventStream = (function(){
       "Wow we're making loads of money!",
       "This is a random message",
       "I don't have any friends :(",
-      "This relevant message sent from my iPhone"
+      "This relevant message sent from my iPhone",
+      "What is this all about?!",
+      "This chat box is way too small"
     ],
     chat: function(){
-      var infos = ['John Doe', 'Jean Doe', 'Ismael Celis', 'Makoto Inoue', 'Mark Evans', 'Max Williams'];
+     var infos = ['John Doe', 'Jean Doe', 'Dr. Doolittle', 'Barack Obama', 'Corey88', 'Napoleon', 'Bruce Wayne'];
       
       return {
         event: 'chat_message',
         data: {
           event_date: now(),
-          info: infos[Math.round(Math.random(5)*5)],
-          message: Stubs.messages[Math.round(Math.random(5)*5)]
+          info: infos[Stubs.index(6)],
+          message: Stubs.messages[Stubs.index(7)]
         }
       };
     }
@@ -65,7 +69,7 @@ exports.StubEventStream = (function(){
   // 51.5256013 -0.109946
       
   function randomEvent(){
-    var type = ['chat','contact','order'][Math.floor(Math.random(3)*3)]
+    var type = ['chat','contact','order'][Stubs.index(2)]
     return Stubs[type]();
   }
   
