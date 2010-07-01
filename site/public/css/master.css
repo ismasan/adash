@@ -85,6 +85,8 @@ section.bar {
 #ActivityWidget .order_placed:hover { background-color: #847E1F;}
 #ActivityWidget .order_cancelled { background-color: #662D08;}
 #ActivityWidget .order_cancelled:hover { background-color: #93410C;}
+#ActivityWidget .chat_message { background-color: #51686E;}
+#ActivityWidget .chat_message:hover { background-color: #709199;}
 
 #LocationWidget {
   position: absolute;
