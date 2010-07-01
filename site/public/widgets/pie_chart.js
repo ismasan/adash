@@ -35,7 +35,6 @@ Widgets.PieChartWidget = (function(){
   var klass = function(event_stream, container_element){
     server    = event_stream;
     container = container_element;
-    console.log(container);
     // server.bind_all(update);
     $.each(['order_placed', 'order_cancelled', 'order_shipped', 'order_closed'], function(i,e){
       server.bind(e, function(data){

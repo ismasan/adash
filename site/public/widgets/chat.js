@@ -10,7 +10,7 @@ Widgets.ChatWidget = (function(){
     var form = $('<form id="chat_form"><input type="text" name="user" placeholder="User name" /><input type="text" name="message" placeholder="message" /></form>');
     container.append(form);
     form.submit(function(){
-      server.trigger('chat_message', {
+      server.send('chat_message', {
         event_date: Utils.now(),
         info: form.find('input[name=user]').val(),
         message: form.find('input[name=message]').val()
