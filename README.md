@@ -5,6 +5,6 @@ Example Node sockets server:
     
 ## HTML app
 
-Just open in it your browser
+Just open it in your browser
 
     site/public/index.html
