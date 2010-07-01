@@ -87,6 +87,10 @@ section.bar {
 #ActivityWidget .order_cancelled:hover { background-color: #93410C;}
 #ActivityWidget .chat_message { background-color: #51686E;}
 #ActivityWidget .chat_message:hover { background-color: #709199;}
+#ActivityWidget .user_connected { background-color: #6A326E;}
+#ActivityWidget .user_connected:hover { background-color: #893F8F;}
+#ActivityWidget .user_disconnected { background-color: #6E2C2E;}
+#ActivityWidget .user_disconnected:hover { background-color: #8F3A3D;}
 
 #LocationWidget {
   position: absolute;
