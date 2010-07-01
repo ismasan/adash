@@ -10,7 +10,7 @@
     var MAP;
     var active_widgets = {},
         Widgets = {},
-        server = new ServerEventsDispatcher('ws://ismasan.local:8000');//new StubEventStream();
+        server = new ServerEventsDispatcher('ws://ismasan.local:8000');
     
     $(function(){
       for(widget_name in Widgets){
@@ -25,6 +25,7 @@
   <script type="text/javascript" src="./widgets/controls.js"></script>
   <script type="text/javascript" src="./widgets/order_totals.js"></script>
   <script type="text/javascript" src="./widgets/chat.js"></script>
+  <script type="text/javascript" src="./widgets/alarms.js"></script>
 	<title>Websockets Activity Board</title>
 </head>
 <body>
