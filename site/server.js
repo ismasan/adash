@@ -49,15 +49,15 @@ server.addListener("request", function(req, res){
 });
 
 
-function MockEvents(){
+function MockEvents(seconds){
   var stubs = require('./lib/mock_events');
   stream = new stubs.StubEventStream(function(e){
     server.broadcast(JSON.stringify(e))
-  }).play();
+  }, seconds).play();
 };
 
 /*-----------------------------------------------
   Server:
 -----------------------------------------------*/
-MockEvents();
+MockEvents(3);// mock events every x seconds
 server.listen(8000, "ismasan.local");

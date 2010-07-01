@@ -4,7 +4,7 @@ exports.StubEventStream = (function(){
   var interval, 
       running = false, 
       counter = 0,
-      interval_seconds = 2;
+      interval_seconds;
   
   var Stubs = {
     lats: [51.5276013, 51.4256013, 51.5356013, 51.525609, 51.5256011, 51.525600, 51.5244011, 51.5956011, 51.5258011, 51.5256022],
@@ -79,8 +79,9 @@ exports.StubEventStream = (function(){
   
   var self, callback;
   
-  var klass = function(a_callback){
+  var klass = function(a_callback, seconds){
     callback = a_callback;
+    interval_seconds = seconds || 2;
     self = this;
     sys.puts(this)
   };
